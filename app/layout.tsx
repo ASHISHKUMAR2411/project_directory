@@ -3,8 +3,8 @@ import './globals.css';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'Flexible',
-  description: 'Showcase your work with flexible layouts.',
+  title: 'Flex',
+  description: 'Showcase your work with beautiful layouts.',
 }
 
 export default function RootLayout({

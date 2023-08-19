@@ -1,0 +1,6 @@
+npm run dev
+npx grafbase@0.24 dev
+get google cloud client id and secret id, from api and selecting oauth by creating crendential 
+from graphbase get NEXT_PUBLIC_GRAFBASE_API_URL and key from there website by creating an account 
+Go to NextAuth.js website to confiruation/options and then search nextauth secret
+Go to bash and paste openssl rand -base64 32 the code you get will be next auth secret
