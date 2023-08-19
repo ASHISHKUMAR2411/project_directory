@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import FormField from './FormField';
 import Button from './Button';
 import CustomMenu from './CustomMenu';
-import { categoryFilters } from '@/constants';
+import { categoryFilters } from '@/constant';
 import { updateProject, createNewProject, fetchToken } from '@/lib/actions';
 import { FormState, ProjectInterface, SessionInterface } from '@/common.types';
 
@@ -113,7 +113,7 @@ const ProjectForm = ({ type, session, project }: Props) => {
             <FormField
                 title="Title"
                 state={form.title}
-                placeholder="Flex"
+                placeholder="Flexibble"
                 setState={(value) => handleStateChange('title', value)}
             />
 

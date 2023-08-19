@@ -1,18 +1,19 @@
 import { getServerSession } from "next-auth/next";
 import { NextAuthOptions, User } from "next-auth";
 import { AdapterUser } from "next-auth/adapters";
-import GoogleProvider from 'next-auth/providers/google';
-import jsonwebtoken from "jsonwebtoken";
+import GoogleProvider from "next-auth/providers/google";
+import jsonwebtoken from 'jsonwebtoken'
 import { JWT } from "next-auth/jwt";
-import { SessionInterface, UserProfile } from "@/common.types";
+
 import { createUser, getUser } from "./actions";
+import { SessionInterface, UserProfile } from "@/common.types";
 
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        })
+        }),
     ],
     jwt: {
         encode: ({ secret, token }) => {
@@ -33,56 +34,51 @@ export const authOptions: NextAuthOptions = {
         },
     },
     theme: {
-        colorScheme: 'light',
-        logo: '/logo.png'
+        colorScheme: "light",
+        logo: "/logo.svg",
     },
     callbacks: {
         async session({ session }) {
             const email = session?.user?.email as string;
+
             try {
-                const data = await getUser(email) as { user?: UserProfile };
+                const data = await getUser(email) as { user?: UserProfile }
+
                 const newSession = {
                     ...session,
                     user: {
                         ...session.user,
-                        ...data?.user
-                    }
-                }
+                        ...data?.user,
+                    },
+                };
+
                 return newSession;
-            } catch (error) {
-                console.log("Error Retrieving User Data", error);
+            } catch (error: any) {
+                console.error("Error retrieving user data: ", error.message);
                 return session;
-                
             }
         },
-        async signIn({ user }: { user: AdapterUser | User }) {
+        async signIn({ user }: {
+            user: AdapterUser | User
+        }) {
             try {
-                // Get user if exists
-                const userExists = await getUser(user?.email as string) as { user?: UserProfile };
+                const userExists = await getUser(user?.email as string) as { user?: UserProfile }
 
-                    // If user does not exist, create user
-                if (!userExists.user){
-                await createUser(
-                    user.name as string,
-                    user.email as string,
-                    user.image as string
-                );
-                
+                if (!userExists.user) {
+                    await createUser(user.name as string, user.email as string, user.image as string)
                 }
 
-                return true
-            } catch (error) {
-                console.log(error);
+                return true;
+            } catch (error: any) {
+                console.log("Error checking if user exists: ", error.message);
                 return false;
-                
             }
-        }
-    }
-
-}
+        },
+    },
+};
 
 export async function getCurrentUser() {
     const session = await getServerSession(authOptions) as SessionInterface;
-    // const user = session.user as User;
+
     return session;
 }

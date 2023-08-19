@@ -1,6 +1,6 @@
 import { getUserProjects } from '@/lib/actions'
+import ProfilePage from '@/components/ProfilePage'
 import { UserProfile } from '@/common.types';
-import ProfilePage from '@/components/ProfilePage';
 
 type Props = {
     params: {

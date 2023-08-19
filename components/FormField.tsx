@@ -16,7 +16,6 @@ const FormField = ({ type, title, state, placeholder, isTextArea, setState }: Pr
                 <textarea
                     placeholder={placeholder}
                     value={state}
-                    required
                     className="form_field-input"
                     onChange={(e) => setState(e.target.value)}
                 />

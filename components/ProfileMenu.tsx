@@ -10,6 +10,7 @@ import { SessionInterface } from "@/common.types";
 
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
     const [openModal, setOpenModal] = useState(false);
+
     return (
         <div className="flexCenter z-10 flex-col relative">
             <Menu as="div">
@@ -24,6 +25,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                         />
                     )}
                 </Menu.Button>
+
                 <Transition
                     show={openModal}
                     as={Fragment}
@@ -51,6 +53,7 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
                             )}
                             <p className="font-semibold">{session?.user?.name}</p>
                         </div>
+
                         <div className="flex flex-col gap-3 pt-10 items-start w-full">
                             <Menu.Item>
                                 <Link href={`/profile/${session?.user?.id}`} className="text-sm">Work Preferences</Link>
@@ -75,4 +78,5 @@ const ProfileMenu = ({ session }: { session: SessionInterface }) => {
         </div>
     )
 }
+
 export default ProfileMenu

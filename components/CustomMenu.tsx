@@ -5,19 +5,19 @@ import { Menu, Transition } from '@headlessui/react';
 import Image from 'next/image';
 
 type Props = {
-    title: string;
-    state: string;
-    filters: Array<string>;
+    title: string,
+    state: string,
+    filters: Array<string>,
     setState: (value: string) => void;
 }
 
 const CustomMenu = ({ title, state, filters, setState }: Props) => (
-    <div className="flexStart flexl-col w-ful gap-7 relative">
+    <div className="flexStart flex-col w-full gap-7 relative">
         <label htmlFor={title} className="w-full text-gray-100">{title}</label>
         <Menu as="div" className="self-start relative">
             <div>
                 <Menu.Button className="flexCenter custom_menu-btn">
-                    {state || 'Select a Category'}
+                    {state || 'Category'}
                     <Image
                         src="/arrow-down.svg"
                         width={10}
